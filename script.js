@@ -56,13 +56,22 @@ function showAllSections() {
 
 // Initialize navigation
 document.addEventListener('DOMContentLoaded', function() {
-  // Add click handlers to navigation buttons
+  // Add click and touch handlers to navigation buttons for mobile support
   const navButtons = document.querySelectorAll('.nav a');
   navButtons.forEach(button => {
-    button.addEventListener('click', function(e) {
+    const handleNavigation = function(e) {
       e.preventDefault();
       const sectionId = this.getAttribute('href').substring(1);
       showSection(sectionId);
+    };
+    
+    // Add both click and touch events for better mobile support
+    button.addEventListener('click', handleNavigation);
+    button.addEventListener('touchend', handleNavigation);
+    
+    // Prevent double-tap zoom on mobile navigation
+    button.addEventListener('touchstart', function(e) {
+      e.preventDefault();
     });
   });
   

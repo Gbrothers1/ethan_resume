@@ -86,11 +86,69 @@ code { background:#010; padding:0 4px; border-radius:3px; }
 }
 .github-stats { display:flex; gap:4px; flex-wrap:wrap; margin:4px 0; }
 .github-stat { font-size:0.9rem; }
-@media (max-width:600px) { 
-  body { font-size:13px; } 
-  .container { width: 95vw; padding:12px; }
-  .nav { gap:4px; }
-  .nav a { padding:3px 6px; font-size:0.75rem; }
-  .skills-grid { grid-template-columns:1fr; }
-  .content-text { max-width:100%; }
+@media (max-width:768px) { 
+  body { font-size:14px; } 
+  .container { width: 98vw; padding:8px; }
+  .title { font-size:1.3rem; margin-bottom:4px; }
+  .nav { gap:2px; justify-content:center; }
+  .nav a { padding:4px 6px; font-size:0.7rem; }
+  .skills-grid { grid-template-columns:1fr; gap:2px; }
+  .content-text { max-width:100%; font-size:0.9rem; }
+  .content-area {
+    top: 280px;
+    max-height: 65vh;
+    width: 98vw;
+  }
+  .github-box { padding-left:4px; }
+  #commitFeed { 
+    max-height:120px; 
+    padding:6px; 
+    font-size:0.8rem;
+  }
+  .github-stats { gap:2px; }
+  .github-stat { font-size:0.8rem; }
+  .project-item { padding-left:2px; font-size:0.9rem; }
+}
+
+@media (max-width:480px) {
+  body { font-size:13px; }
+  .container { width: 100vw; padding:4px; }
+  .title { font-size:1.1rem; text-align:center; }
+  .nav { 
+    flex-direction:column; 
+    gap:1px; 
+    align-items:center;
+  }
+  .nav a { 
+    padding:6px 12px; 
+    font-size:0.8rem; 
+    width:80%;
+    text-align:center;
+  }
+  .content-area {
+    top: 400px;
+    max-height: 55vh;
+    width: 100vw;
+    padding: 0 4px;
+  }
+  .content-text { font-size:0.85rem; line-height:1.4; }
+  .skills-grid { margin:2px 0; }
+  .skill-category { font-size:0.85rem; }
+  .github-box { 
+    border-left:1px solid var(--accent);
+    padding-left:2px; 
+  }
+  #commitFeed { 
+    max-height:100px; 
+    padding:4px; 
+    font-size:0.75rem;
+  }
+  #commitFeed li { font-size:0.75rem; }
+  .github-stats { 
+    flex-direction:column; 
+    gap:1px; 
+  }
+  .github-stat { font-size:0.75rem; }
+  .project-item { font-size:0.85rem; }
+  .divider, .divider-nav { font-size:0.7rem; }
 } 
