@@ -1,23 +1,16 @@
 name: trivy
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  push:        { branches: [ main ] }
+  pull_request:{ branches: [ main ] }
 
 jobs:
   scan:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
     steps:
       - uses: actions/checkout@v4
 
-      # Scan repository files (no container image needed here)
-      - name: Trivy file-system scan
-        uses: aquasecurity/trivy-action@v0.32.0
+      - name: Trivy FS scan
+        uses: aquasecurity/trivy-action@v0.32.0   # ←  update tag
         with:
-          scan-type: fs           # file-system scan
-          ignore-unfixed: true    # ignore unfixed vulns
-          vuln-type: os,library   # scan OS & deps
+          scan-type: fs          # scan repository files
+          ignore-unfixed: true   # ignore vulns without patch
