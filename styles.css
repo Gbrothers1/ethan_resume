@@ -201,3 +201,198 @@ code { background:#010; padding:0 4px; border-radius:3px; }
     display: none;
   }
 } 
+
+@media print {
+  /* Print page setup */
+  @page {
+    size: letter;
+    margin: 0.75in;
+  }
+  
+  /* Remove backgrounds for print */
+  * {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Hide everything except print-only content */
+  body > *:not(.print-only) {
+    display: none !important;
+  }
+  
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Show and style print-only content */
+  .print-only {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11pt !important;
+    font-family: 'Times New Roman', serif !important;
+    line-height: 1.3 !important;
+    overflow: visible !important;
+    page-break-inside: auto !important;
+  }
+  
+  .print-only * {
+    position: static !important;
+    float: none !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  
+  .print-only a { 
+    color: #000 !important; 
+    text-decoration: none !important; 
+  }
+  
+  /* Header styling */
+  .print-only .title {
+    font-size: 16pt !important;
+    font-weight: bold !important;
+    margin-bottom: 6pt !important;
+    text-align: center !important;
+    page-break-after: avoid !important;
+  }
+  
+  /* Section headers */
+  .print-section-header {
+    font-weight: bold !important;
+    font-size: 13pt !important;
+    margin-top: 18pt !important;
+    margin-bottom: 8pt !important;
+    page-break-after: avoid !important;
+    page-break-before: auto !important;
+    text-decoration: underline !important;
+    text-transform: uppercase !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  
+  /* Ensure first section doesn't have top margin */
+  .print-section-header:first-of-type {
+    margin-top: 12pt !important;
+  }
+  
+  /* Allow long sections to break across pages */
+  .print-content.content-text {
+    page-break-inside: auto !important;
+  }
+  
+  /* Cover letter can break across pages if needed */
+  .print-content.content-text:first-of-type {
+    page-break-inside: auto !important;
+  }
+  
+  /* Content styling */
+  .print-content {
+    display: block !important;
+    margin-bottom: 12pt !important;
+    line-height: 1.4 !important;
+    orphans: 2 !important;
+    widows: 2 !important;
+    visibility: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    page-break-inside: auto !important;
+  }
+  
+  /* All content elements should be visible */
+  .print-content * {
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  
+  /* Skills grid as simple list */
+  .print-content.skills-grid,
+  .print-content .skills-grid { 
+    display: block !important;
+    margin-bottom: 12pt !important;
+  }
+  
+  .print-content .skill-category { 
+    margin-bottom: 4pt !important; 
+    display: block !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Projects list */
+  .print-content.projects-list,
+  .print-content .projects-list {
+    display: block !important;
+    margin-bottom: 12pt !important;
+  }
+  
+  .print-content .project-item { 
+    margin-bottom: 3pt !important; 
+    display: block !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Content text sections */
+  .print-content.content-text,
+  .print-content .content-text {
+    display: block !important;
+    margin-bottom: 12pt !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* GitHub section */
+  .print-content.github-box { 
+    border: none !important; 
+    padding: 0 !important;
+    margin-bottom: 12pt !important;
+  }
+  
+  .print-content #commitFeed { 
+    max-height: none !important; 
+    overflow: visible !important;
+    background: #f9f9f9 !important;
+    border: 1pt solid #ccc !important;
+    padding: 6pt !important;
+    font-size: 9pt !important;
+    margin-top: 6pt !important;
+  }
+  
+  .print-content #commitFeed ul {
+    margin: 0 !important;
+    padding-left: 12pt !important;
+    list-style-type: disc !important;
+  }
+  
+  .print-content #commitFeed li {
+    margin-bottom: 2pt !important;
+    font-size: 9pt !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Hide images and interactive elements */
+  .print-content .github-box img,
+  .print-only .nav,
+  .print-only #printBtn,
+  .print-only .divider,
+  .print-only .divider-nav {
+    display: none !important;
+  }
+  
+  /* GitHub stats */
+  .print-content .github-stats {
+    display: none !important;
+  }
+} 
