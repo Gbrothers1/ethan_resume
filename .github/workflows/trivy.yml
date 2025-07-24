@@ -16,7 +16,7 @@ jobs:
 
       # Scan repository files (no container image needed here)
       - name: Trivy file-system scan
-        uses: aquasecurity/trivy-action@v0.11.0
+        uses: aquasecurity/trivy-action@v0.32.0
         with:
           scan-type: fs           # file-system scan
           ignore-unfixed: true    # ignore unfixed vulns
