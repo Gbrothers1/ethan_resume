@@ -1,89 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ethan Gordon – Résumé (terminal style)</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap">
-<style>
-  :root{
-    --bg:#000;--fg:#0f0;--fg-soft:#6f6;--accent:#060;
-  }
-  html,body{margin:0;height:100%;font-family:'Fira Mono',monospace;color:var(--fg);background:var(--bg);overflow-x:hidden}
-  .container{max-width:900px;margin:0 auto;padding:24px;white-space:pre-line;line-height:1.35}
-  .title{font-size:1.6rem;font-weight:700;margin-bottom:8px}
-  .divider{color:var(--accent);font-size:0.8rem}
-  a{color:var(--fg);text-decoration:none}
-  a:hover{background:var(--fg);color:var(--bg)}
-  .section{font-weight:700;color:var(--fg-soft)}
-  code{background:#010;padding:0 4px;border-radius:3px}
-  /* Navigation */
-  .nav{margin:12px 0;display:flex;flex-wrap:wrap;gap:6px}
-  .nav a{padding:4px 10px;border:1px solid var(--fg);background:#010;font-size:0.8rem;color:var(--fg);cursor:pointer}
-  .nav a:hover{background:var(--fg);color:var(--bg)}
-  @media(max-width:600px){body{font-size:13px}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ethan Gordon - Résumé (terminal style)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg:#000; --fg:#0f0; --fg-soft:#6f6; --accent:#060; }
+    html,body { margin:0; height:100%; font-family:'Fira Mono',monospace; color:var(--fg); background:var(--bg); overflow-x:hidden; }
+    .container { max-width:900px; margin:0 auto; padding:24px; white-space:pre-line; line-height:1.35; }
+    .title { font-size:1.6rem; font-weight:700; margin-bottom:8px; }
+    .divider { color:var(--accent); font-size:0.8rem; }
+    a { color:var(--fg); text-decoration:none; }
+    a:hover { background:var(--fg); color:var(--bg); }
+    .section { font-weight:700; color:var(--fg-soft); }
+    code { background:#010; padding:0 4px; border-radius:3px; }
+    /* Navigation */
+    .nav { margin:12px 0; display:flex; flex-wrap:wrap; gap:6px; }
+    .nav a { padding:4px 10px; border:1px solid var(--fg); background:#010; font-size:0.8rem; color:var(--fg); cursor:pointer; }
+    .nav a:hover { background:var(--fg); color:var(--bg); }
+    /* GitHub widgets */
+    #commitFeed { background:#010; border:1px solid var(--fg); padding:10px; margin-top:10px; max-height:200px; overflow-y:auto; }
+    #commitFeed li { margin:4px 0; }
+    @media (max-width:600px) { body { font-size:13px; } }
+  </style>
 </head>
 <body>
-<div class="container">
-  <span class="title">ETHAN GORDON</span>
-  <span>Systems Integrator | Embedded/Robotics | Net/DevOps | U.S. Navy Vet (Secret-eligible)</span>
+  <div class="container">
+    <span class="title">ETHAN GORDON</span>
+    <span>Systems Integrator | Embedded/Robotics | Net/DevOps | U.S. Navy Vet (Secret-eligible)</span>
 
-  <span class="divider">======================================================================================</span>
-  <strong>LOCATION:</strong> Elko, NV  <strong>RELOCATION:</strong> Atlanta, GA  <strong>EMAIL:</strong> <a href="mailto:resume@ethangordon.io">resume@ethangordon.io</a>
-  <span class="divider">======================================================================================</span>
+    <!-- Security badge -->
+    <div style="margin:6px 0;">
+      <img alt="security scan" src="https://img.shields.io/github/actions/workflow/status/gbrothers1/ethan_resume/trivy.yml?label=scan&style=flat-square&color=0f0" />
+    </div>
 
-  <!-- Navigation -->
-  <div class="nav">
-    <a href="#summary">SUMMARY</a>
-    <a href="#core-skills">CORE SKILLS</a>
-    <a href="#projects">PROJECTS</a>
-    <a href="#experience">EXPERIENCE</a>
-    <a href="#education">EDUCATION</a>
-    <a href="#additional">ADDITIONAL</a>
+    <span class="divider">======================================================================================</span>
+    <strong>LOCATION:</strong> Elko, NV  <strong>RELOCATION:</strong> Atlanta, GA  
+    <strong>EMAIL:</strong> <a href="mailto:resume@ethangordon.io">resume@ethangordon.io</a>
+    <span class="divider">======================================================================================</span>
+
+    <!-- Navigation -->
+    <div class="nav">
+      <a href="#summary">SUMMARY</a>
+      <a href="#core-skills">CORE SKILLS</a>
+      <a href="#projects">PROJECTS</a>
+      <a href="#experience">EXPERIENCE</a>
+      <a href="#education">EDUCATION</a>
+      <a href="#additional">ADDITIONAL</a>
+      <a href="#github">GITHUB</a>
+    </div>
+    <span class="divider">======================================================================================</span>
+
+    <span class="section" id="summary">SUMMARY</span>
+    I bridge hardware, autonomy software, and networking. From ROS2 stacks on a Steam Deck to GPU ML in LXC and RF mesh tinkering with RTL-SDR, I ship field-ready systems, then break and harden them in the wild. Mission-first, clearance-ready, ramping in days—not months.
+
+    <span class="section" id="core-skills">CORE SKILLS</span>
+    Lang/OS  : Python · C/C++ · Rust · Bash · Linux (Debian/Proxmox) · Docker/LXC
+    Robotics : ROS2 · WebSockets · OpenCV · PID/GNC · HIL test rigs
+    Net/RF   : TCP/UDP/IP · NGINX/TLS · Mesh/RF proto (RTL-SDR, phased arrays)
+    Embedded : Microcontrollers · ignition/injector diagnostics · rapid prototyping
+    Data/Tool: CI/CD · Nix/Make · FAISS · embeddings · schema/CLI design
+
+    <span class="section" id="projects">SELECTED PROJECTS</span>
+    • SDR_OS Steam-Deck ROS2 Control Stack – ROS2↔WebSocket bridge, React UI; CUDA/Ollama containers; operator setup ↓ hours → minutes.<br>
+    • Genesis AI Sim AVX Fix – CPU-flag gating & legacy binaries; killed AVX2 crashes in LXC/Docker; RL sims back online.<br>
+    • NGINX TLS Proxy – Self-signed PKI + SNI securing Portainer/OpenWebUI/Netdata; unified HTTPS entry.<br>
+    • RF/Mesh (RTL-SDR + Starlink) – IQ capture/FFT carrier & SNR analysis; explored phased-array reuse for P2P links.<br>
+    • Embedded Diagnostics – MCU coil tester (Skidoo); 1 Ω TBI injector current-limit (series R/PWM).<br>
+    • GPU Passthrough → LXC – NVIDIA devices → LXC; Docker ML stack with Netdata & Portainer.<br>
+    • Gimbal PID + CV – PID in C++ with OpenCV target feed; XR/VR operator UX concept.<br>
+    • Legal Evidence Vector DB – SentenceTransformer + FAISS over recfile/org-roam logs; court packet gen ← hours.
+
+    <span class="section" id="experience">EXPERIENCE</span>
+    Independent Engineer / Founder GPR Mobile 2018-Present<br>
+      – Integration-heavy builds across robotics, embedded, infra.<br>
+      – Deployment tooling, CI flows, secure proxies, RF analysis.<br>
+
+    U.S. Navy Nuclear Field Power School Graduate 2013-2015<br>
+      – Operated in high-stress, regulated technical environments.<br>
+      – Held DoD Secret (lapsed); strong classified-handling discipline.
+
+    <span class="section" id="education">EDUCATION</span>
+    Self-directed advanced study in CS/Robotics/Embedded Systems.<br>
+    College sophomore – Secondary Education (Mathematics).
+
+    <span class="section" id="additional">ADDITIONAL</span>
+    • Travel-ready for field tests (Mission Ops / Test & Eval)<br>
+    • Request relocation assistance (reimbursement clause acceptable)<br>
+    • Veteran-friendly employer preference appreciated
+
+    <!-- GitHub Metrics -->
+    <span class="section" id="github">GITHUB ACTIVITY</span>
+    <img alt="contributions" src="https://ghchart.rshah.org/0f0/gbrothers1" style="max-width:100%;border:1px solid var(--fg);background:#010;padding:4px" />
+    <div id="commitFeed"><em>Loading latest commits…</em></div>
+
+    <span class="divider">======================================================================================</span>
+    <small>Built with pure HTML/CSS/JS — GitHub metrics pull live from the public API.</small>
   </div>
-  <span class="divider">======================================================================================</span>
 
-  <span class="section" id="summary">SUMMARY</span>
-  I bridge hardware, autonomy software, and networking. From ROS2 stacks on a Steam Deck to GPU ML in LXC and RF mesh tinkering with RTL-SDR, I ship field-ready systems, then break and harden them in the wild. Mission-first, clearance-ready, ramping in days—not months.
-
-  <span class="section" id="core-skills">CORE SKILLS</span>
-  Lang/OS  : Python · C/C++ · Rust · Bash · Linux (Debian/Proxmox) · Docker/LXC
-  Robotics : ROS2 · WebSockets · OpenCV · PID/GNC · HIL test rigs
-  Net/RF   : TCP/UDP/IP · NGINX/TLS · Mesh/RF proto (RTL-SDR, phased arrays)
-  Embedded : Microcontrollers · ignition/injector diagnostics · rapid prototyping
-  Data/Tool: CI/CD · Nix/Make · FAISS · embeddings · schema/CLI design
-
-  <span class="section" id="projects">SELECTED PROJECTS</span>
-  • SDR_OS Steam-Deck ROS2 Control Stack – ROS2⇆WebSocket bridge, React UI; CUDA/Ollama containers; operator setup ↓ hours → minutes.
-  • Genesis AI Sim AVX Fix – CPU-flag gating & legacy binaries; stopped AVX2 crashes in LXC/Docker; RL sims back online.
-  • NGINX TLS Proxy – Self-signed PKI + SNI securing Portainer/OpenWebUI/Netdata; unified HTTPS entry.
-  • RF/Mesh (RTL-SDR + Starlink Dish) – IQ capture/FFT carrier & SNR analysis; explored phased-array reuse for P2P tactical links.
-  • Embedded Diagnostics – MCU coil tester for Skidoo ignition; 1 Ω TBI injector current limit via series-R/PWM.
-  • GPU Passthrough → LXC – NVIDIA devices → LXC; Docker ML stack with Netdata & Portainer.
-  • Gimbal PID + CV – PID loops in C++ with OpenCV target feed; XR/VR operator UX concept.
-  • Legal Evidence Vector DB – ST embeddings + FAISS over recfile/org-roam logs; court packet generation ← hours.
-
-  <span class="section" id="experience">EXPERIENCE</span>
-  Independent Engineer / Founder GPR Mobile 2018-Present
-    – Built integration-heavy solutions across robotics, embedded, infra.
-    – Designed deployment tooling, CI flows, secure proxies, RF analysis.
-
-  U.S. Navy Nuclear Field Power School Graduate 2013-2015
-    – Operated in high-stress, regulated technical environments.
-    – Held DoD Secret (lapsed); strong classified-handling discipline.
-
-  <span class="section" id="education">EDUCATION</span>
-  Self-directed advanced study in CS/Robotics/Embedded Systems.
-  College sophomore – Secondary Education (Mathematics).
-
-  <span class="section" id="additional">ADDITIONAL</span>
-  • Travel-ready for field tests (Mission Ops / Test & Eval)
-  • Request relocation assistance (reimbursement clause acceptable)
-  • Veteran-friendly employer preference appreciated
-
-  <span class="divider">======================================================================================</span>
-  <small>Built with pure HTML/CSS – minimal interactive dependencies removed per request.</small>
-</div>
+  <script>
+    /* ---------- Live commit feed ---------- */
+    (async function () {
+      const feed = document.getElementById('commitFeed');
+      if (!feed) return;
+      try {
+        const res = await fetch(
+          'https://api.github.com/users/gbrothers1/events?per_page=30',
+          { headers: { Accept: 'application/vnd.github.v3+json' } }
+        );
+        const events = await res.json();
+        const commits = events.filter(e => e.type === 'PushEvent').slice(0, 8);
+        if (!commits.length) {
+          feed.textContent = 'No recent public commits.';
+          return;
+        }
+        const ul = document.createElement('ul');
+        commits.forEach(ev => {
+          if (!ev.payload.commits.length) return;
+          const c = ev.payload.commits[0];
+          const li = document.createElement('li');
+          const date = new Date(ev.created_at).toLocaleDateString();
+          li.textContent = `[${date}] ${ev.repo.name}: ${c.message.slice(0, 60)}`;
+          ul.appendChild(li);
+        });
+        feed.innerHTML = '';
+        feed.appendChild(ul);
+      } catch (err) {
+        console.error(err);
+        feed.textContent = 'Failed to load commits';
+      }
+    })();
+  </script>
 </body>
 </html>
