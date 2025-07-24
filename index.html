@@ -99,31 +99,31 @@
     <small>Built with pure HTML/CSS/JS — GitHub metrics pull live from the public API.</small>
   </div>
 
-  <script>
-    /* ---------- Live commit feed ---------- */
+    <script>
+    /* ---------- Live commit feed (per-repo) ---------- */
     (async function () {
       const feed = document.getElementById('commitFeed');
       if (!feed) return;
+
       try {
         const res = await fetch(
-          'https://api.github.com/users/gbrothers1/events?per_page=30',
+          'https://api.github.com/repos/gbrothers1/ethan_resume/commits?per_page=8',
           { headers: { Accept: 'application/vnd.github.v3+json' } }
         );
-        const events = await res.json();
-        const commits = events.filter(e => e.type === 'PushEvent').slice(0, 8);
-        if (!commits.length) {
-          feed.textContent = 'No recent public commits.';
+        const commits = await res.json();
+        if (!Array.isArray(commits) || !commits.length) {
+          feed.textContent = 'No commits yet.';
           return;
         }
+
         const ul = document.createElement('ul');
-        commits.forEach(ev => {
-          if (!ev.payload.commits.length) return;
-          const c = ev.payload.commits[0];
-          const li = document.createElement('li');
-          const date = new Date(ev.created_at).toLocaleDateString();
-          li.textContent = `[${date}] ${ev.repo.name}: ${c.message.slice(0, 60)}`;
+        commits.forEach(c => {
+          const date = new Date(c.commit.author.date).toLocaleDateString();
+          const li   = document.createElement('li');
+          li.textContent = `[${date}] ${c.commit.message.slice(0, 60)}`;
           ul.appendChild(li);
         });
+
         feed.innerHTML = '';
         feed.appendChild(ul);
       } catch (err) {
@@ -132,5 +132,8 @@
       }
     })();
   </script>
+  <!-- Cloudflare Web Analytics -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "dc48c68cb6914967b46493882d5cba6f"}'></script>
+  <!-- End Cloudflare Web Analytics -->
 </body>
 </html>
