@@ -3,26 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ethan Gordon – Résumé (man‑page style)</title>
+<title>Ethan Gordon – Résumé (terminal style)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.5.0/css/xterm.css">
 <style>
   :root{
     --bg:#000;--fg:#0f0;--fg-soft:#6f6;--accent:#060;
   }
   html,body{margin:0;height:100%;font-family:'Fira Mono',monospace;color:var(--fg);background:var(--bg);overflow-x:hidden}
-  /* ===== BACKGROUND ===== */
-  /* Neon grid drawn with two repeating gradients */
-  body::before{
-    content:"";position:fixed;inset:0;z-index:-2;
-    /* brighter neon grid */
-    background:
-      repeating-linear-gradient(0deg ,rgba(0,255,0,.4) 0 1px ,transparent 1px 60px),
-      repeating-linear-gradient(90deg,rgba(0,255,0,.4) 0 1px ,transparent 1px 60px);
-  }
-  /* lighter overlay so grid remains visible */
-  body::after{content:"";position:fixed;inset:0;z-index:-1;background:rgba(0,0,0,0.4)}{content:"";position:fixed;inset:0;z-index:-1;background:rgba(0,0,0,0.6)}
-
   .container{max-width:900px;margin:0 auto;padding:24px;white-space:pre-line;line-height:1.35}
   .title{font-size:1.6rem;font-weight:700;margin-bottom:8px}
   .divider{color:var(--accent);font-size:0.8rem}
@@ -30,26 +17,23 @@
   a:hover{background:var(--fg);color:var(--bg)}
   .section{font-weight:700;color:var(--fg-soft)}
   code{background:#010;padding:0 4px;border-radius:3px}
-  /* NAV */
+  /* Navigation */
   .nav{margin:12px 0;display:flex;flex-wrap:wrap;gap:6px}
-  .nav a,.nav button{padding:4px 10px;border:1px solid var(--fg);background:#010;font-size:0.8rem;color:var(--fg);cursor:pointer}
-  .nav a:hover,.nav button:hover{background:var(--fg);color:var(--bg)}
-  /* INTERACTIVE ELEMENTS */
-  #termWrap{margin-top:12px;border:1px solid var(--fg);background:#010;height:200px}
-  #chartWrap{margin-top:20px;border:1px solid var(--fg);background:#010;padding:10px}
-  canvas{width:100%!important;height:250px!important}
+  .nav a{padding:4px 10px;border:1px solid var(--fg);background:#010;font-size:0.8rem;color:var(--fg);cursor:pointer}
+  .nav a:hover{background:var(--fg);color:var(--bg)}
   @media(max-width:600px){body{font-size:13px}}
 </style>
 </head>
 <body>
 <div class="container">
   <span class="title">ETHAN GORDON</span>
-  <span>Systems Integrator | Embedded/Robotics | Net/DevOps | U.S. Navy Vet (Secret‑eligible)</span>
+  <span>Systems Integrator | Embedded/Robotics | Net/DevOps | U.S. Navy Vet (Secret-eligible)</span>
 
   <span class="divider">======================================================================================</span>
   <strong>LOCATION:</strong> Elko, NV  <strong>RELOCATION:</strong> Atlanta, GA  <strong>EMAIL:</strong> <a href="mailto:repair@gprmobile.com">repair@gprmobile.com</a>
   <span class="divider">======================================================================================</span>
 
+  <!-- Navigation -->
   <div class="nav">
     <a href="#summary">SUMMARY</a>
     <a href="#core-skills">CORE SKILLS</a>
@@ -57,68 +41,49 @@
     <a href="#experience">EXPERIENCE</a>
     <a href="#education">EDUCATION</a>
     <a href="#additional">ADDITIONAL</a>
-    <button id="toggle">LIGHT</button>
   </div>
   <span class="divider">======================================================================================</span>
 
   <span class="section" id="summary">SUMMARY</span>
-  I bridge hardware, autonomy software, and networking. From ROS2 stacks on a Steam Deck to GPU ML in LXC and RF mesh tinkering with RTL‑SDR, I ship field‑ready systems, then break and harden them in the wild. Mission‑first, clearance‑ready, ramping in days—not months.
+  I bridge hardware, autonomy software, and networking. From ROS2 stacks on a Steam Deck to GPU ML in LXC and RF mesh tinkering with RTL-SDR, I ship field-ready systems, then break and harden them in the wild. Mission-first, clearance-ready, ramping in days—not months.
 
   <span class="section" id="core-skills">CORE SKILLS</span>
   Lang/OS  : Python · C/C++ · Rust · Bash · Linux (Debian/Proxmox) · Docker/LXC
   Robotics : ROS2 · WebSockets · OpenCV · PID/GNC · HIL test rigs
-  Net/RF   : TCP/UDP/IP · NGINX/TLS · Mesh/RF proto (RTL‑SDR, phased arrays)
+  Net/RF   : TCP/UDP/IP · NGINX/TLS · Mesh/RF proto (RTL-SDR, phased arrays)
   Embedded : Microcontrollers · ignition/injector diagnostics · rapid prototyping
   Data/Tool: CI/CD · Nix/Make · FAISS · embeddings · schema/CLI design
 
   <span class="section" id="projects">SELECTED PROJECTS</span>
-  • SDR_OS Steam‑Deck ROS2 Control Stack – ROS2⇆WebSocket bridge, React UI; CUDA/Ollama containers; operator setup ↓ hours → minutes.
-  • Genesis AI Sim AVX Fix – CPU‑flag gating & legacy binaries; stopped AVX2 crashes in LXC/Docker; RL sims back online.
-  • NGINX TLS Proxy – Self‑signed PKI + SNI securing Portainer/OpenWebUI/Netdata; unified HTTPS entry.
-  • RF/Mesh (RTL‑SDR + Starlink Dish) – IQ capture/FFT carrier & SNR analysis; explored phased‑array reuse for P2P tactical links.
-  • Embedded Diagnostics – MCU coil tester for Skidoo ignition; 1 Ω TBI injector current limit via series‑R/PWM.
+  • SDR_OS Steam-Deck ROS2 Control Stack – ROS2⇆WebSocket bridge, React UI; CUDA/Ollama containers; operator setup ↓ hours → minutes.
+  • Genesis AI Sim AVX Fix – CPU-flag gating & legacy binaries; stopped AVX2 crashes in LXC/Docker; RL sims back online.
+  • NGINX TLS Proxy – Self-signed PKI + SNI securing Portainer/OpenWebUI/Netdata; unified HTTPS entry.
+  • RF/Mesh (RTL-SDR + Starlink Dish) – IQ capture/FFT carrier & SNR analysis; explored phased-array reuse for P2P tactical links.
+  • Embedded Diagnostics – MCU coil tester for Skidoo ignition; 1 Ω TBI injector current limit via series-R/PWM.
   • GPU Passthrough → LXC – NVIDIA devices → LXC; Docker ML stack with Netdata & Portainer.
   • Gimbal PID + CV – PID loops in C++ with OpenCV target feed; XR/VR operator UX concept.
-  • Legal Evidence Vector DB – ST embeddings + FAISS over recfile/org‑roam logs; court packet generation ← hours.
+  • Legal Evidence Vector DB – ST embeddings + FAISS over recfile/org-roam logs; court packet generation ← hours.
 
   <span class="section" id="experience">EXPERIENCE</span>
-  Independent Engineer / Founder GPR Mobile 2018‑Present
-    – Built integration‑heavy solutions across robotics, embedded, infra.
+  Independent Engineer / Founder GPR Mobile 2018-Present
+    – Built integration-heavy solutions across robotics, embedded, infra.
     – Designed deployment tooling, CI flows, secure proxies, RF analysis.
 
-  U.S. Navy Nuclear Field Power School Graduate 2013‑2015
-    – Operated in high‑stress, regulated technical environments.
-    – Held DoD Secret (lapsed); strong classified‑handling discipline.
+  U.S. Navy Nuclear Field Power School Graduate 2013-2015
+    – Operated in high-stress, regulated technical environments.
+    – Held DoD Secret (lapsed); strong classified-handling discipline.
 
   <span class="section" id="education">EDUCATION</span>
-  Self‑directed advanced study in CS/Robotics/Embedded Systems.
+  Self-directed advanced study in CS/Robotics/Embedded Systems.
   College sophomore – Secondary Education (Mathematics).
 
   <span class="section" id="additional">ADDITIONAL</span>
-  • Travel‑ready for field tests (Mission Ops / Test & Eval)
+  • Travel-ready for field tests (Mission Ops / Test & Eval)
   • Request relocation assistance (reimbursement clause acceptable)
-  • Veteran‑friendly employer preference appreciated
-
-  <span class="section">INTERACTIVE TERMINAL</span>
-  <div id="termWrap"></div>
-
-  <span class="section">SKILL‑MAP</span>
-  <div id="chartWrap"><canvas id="skillChart"></canvas></div>
+  • Veteran-friendly employer preference appreciated
 
   <span class="divider">======================================================================================</span>
-  <small>Built with pure HTML/CSS/JS – view source for code.</small>
+  <small>Built with pure HTML/CSS – minimal interactive dependencies removed per request.</small>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/xterm@5.5.0/dist/xterm.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script>
-(function(){
-  const t=document.getElementById('toggle'); if(!t||t.dataset.bound)return; t.dataset.bound='1';
-  t.addEventListener('click',()=>{
-    const dark=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()==='#000';
-    if(dark){document.documentElement.style.setProperty('--bg','#fafafa');document.documentElement.style.setProperty('--fg','#060');document.documentElement.style.setProperty('--fg-soft','#070');document.documentElement.style.setProperty('--accent','#090');t.textContent='DARK';}
-    else{document.documentElement.style.setProperty('--bg','#000');document.documentElement.style.setProperty('--fg','#0f0');document.documentElement.style.setProperty('--fg-soft','#6f6');document.documentElement.style.setProperty('--accent','#060');t.textContent='LIGHT';}
-  });
-})();
-(function(){
-  const wrap=document
+</body>
+</html>
