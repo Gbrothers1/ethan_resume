@@ -1,20 +1,20 @@
-name: trivy
-
+name: build
 on:
   push:
-    branches: [ main ]
+    branches:
+    - main
   pull_request:
-    branches: [ main ]
-
 jobs:
-  scan:
-    runs-on: ubuntu-latest
-
+  build:
+    name: Build
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Trivy file-system scan
-        uses: aquasecurity/trivy-action
-        with:
-          scan-type: fs          # scan repository files
-          ignore-unfixed: true   # skip vulns with no patch
+    - name: Run Trivy vulnerability scanner in fs mode
+      uses: aquasecurity/trivy-action@0.28.0
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        trivy-config: trivy.yaml
