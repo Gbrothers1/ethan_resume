@@ -59,7 +59,22 @@ code { background:#010; padding:0 4px; border-radius:3px; }
 /* Navigation */
 .nav {
   z-index: 2; /* Ensure navigation is above content */
-  margin:2px 0; display:flex; flex-wrap:wrap; gap:4px; }
+  margin:2px 0; 
+  display:flex !important; 
+  flex-wrap:wrap; 
+  gap:4px; 
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure navigation is always visible in normal display */
+@media screen {
+  .nav {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
 .nav a { padding:2px 8px; border:1px solid var(--fg); background:#010; font-size:0.8rem; color:var(--fg); cursor:pointer; }
 .nav a:hover { background:var(--fg); color:var(--bg); }
 .nav a.active { background:var(--fg); color:var(--bg); border-color:var(--fg); }
@@ -230,6 +245,11 @@ code { background:#010; padding:0 4px; border-radius:3px; }
   @page {
     size: letter;
     margin: 0.75in;
+  }
+  
+  /* Ensure navigation is hidden only during print */
+  .nav {
+    display: none !important;
   }
   
   /* Remove backgrounds for print */
