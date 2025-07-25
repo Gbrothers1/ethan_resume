@@ -38,7 +38,11 @@
   const starGeometry = new THREE.BufferGeometry();
   starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-  const starMaterial = new THREE.PointsMaterial({ color: 0x00ff00, size: 1 });
+  const starMaterial = new THREE.PointsMaterial({ color: 0x00ff00,
+    size: 2,
+    sizeAttenuation: false,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false });
   const stars = new THREE.Points(starGeometry, starMaterial);
   scene.add(stars);
 
