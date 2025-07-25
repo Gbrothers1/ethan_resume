@@ -429,4 +429,67 @@ code { background:#010; padding:0 4px; border-radius:3px; }
   height: 100%;
   z-index: 0;
   pointer-events: none;
-} 
+}
+
+/* ---------- Idle Popup ---------- */
+.idle-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+  z-index: 9999;
+}
+
+.idle-popup-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.idle-popup {
+  background: #010;
+  border: 2px solid var(--accent);
+  padding: 24px;
+  max-width: 90vw;
+  width: 360px;
+  text-align: center;
+  box-shadow: 0 0 12px var(--accent);
+  animation: popup-show 0.3s ease-out forwards;
+}
+
+@keyframes popup-show {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.idle-popup h2 {
+  margin-top: 0;
+  color: var(--fg-soft);
+}
+
+.idle-popup button {
+  margin-top: 16px;
+  padding: 8px 16px;
+  background: var(--fg);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.idle-popup button:hover {
+  background: var(--fg-soft);
+}

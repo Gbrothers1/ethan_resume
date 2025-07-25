@@ -327,3 +327,57 @@ document.addEventListener('DOMContentLoaded', function() {
     feed.textContent = 'Failed to load commits';
   }
 })(); 
+
+
+/* ---------- Idle Timeout Popup ---------- */
+(function () {
+  const idleTimeMs = 60 * 1000; // 1 minute
+  let idleTimer;
+
+  // Build and append popup markup
+  const popupHTML = `
+    <div class="idle-popup-overlay" id="idlePopup">
+      <div class="idle-popup">
+        <h2>🕹️ AFK DETECTED!</h2>
+        <p>You have been inactive for 60 seconds.<br>Click <strong>CONTINUE</strong> to resume your quest.</p>
+        <button id="idleContinueBtn">CONTINUE ▶</button>
+      </div>
+    </div>`;
+  document.body.insertAdjacentHTML('beforeend', popupHTML);
+
+  const overlay = document.getElementById('idlePopup');
+  const continueBtn = document.getElementById('idleContinueBtn');
+
+  function resetTimer() {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(showPopup, idleTimeMs);
+  }
+
+  function showPopup() {
+    overlay.classList.add('active');
+  }
+
+  if (continueBtn) {
+    continueBtn.addEventListener('click', () => {
+      overlay.classList.remove('active');
+      resetTimer();
+    });
+  }
+
+  // Detect user activity to reset timer
+  ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
+    document.addEventListener(evt, resetTimer, { passive: true });
+  });
+
+  // Initialize timer on load
+  resetTimer();
+
+  // Testing shortcut: Ctrl+Shift+P triggers popup immediately
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && (e.key === 'P' || e.key === 'p')) {
+      showPopup();
+      // Prevent default browser print shortcut when popup is triggered intentionally
+      e.preventDefault();
+    }
+  });
+})(); 
