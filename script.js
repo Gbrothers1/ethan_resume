@@ -327,3 +327,41 @@ document.addEventListener('DOMContentLoaded', function() {
     feed.textContent = 'Failed to load commits';
   }
 })(); 
+
+
+/* ---------- Idle Timeout Popup ---------- */
+(function () {
+  const idleTimeMs = 60 * 1000; // 1 minute
+  let idleTimer;
+
+  // Build and append popup markup
+  const popupHTML = `\n    <div class="idle-popup-overlay" id="idlePopup">\n      <div class="idle-popup">\n        <h2>🕹️ AFK DETECTED!</h2>\n        <p>You have been inactive for 60 seconds.<br>Click <strong>CONTINUE</strong> to resume your quest.</p>\n        <button id="idleContinueBtn">CONTINUE ▶</button>\n      </div>\n    </div>`;
+  document.body.insertAdjacentHTML('beforeend', popupHTML);
+
+  const overlay = document.getElementById('idlePopup');
+  const continueBtn = document.getElementById('idleContinueBtn');
+
+  function resetTimer() {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(showPopup, idleTimeMs);
+  }
+
+  function showPopup() {
+    overlay.classList.add('active');
+  }
+
+  if (continueBtn) {
+    continueBtn.addEventListener('click', () => {
+      overlay.classList.remove('active');
+      resetTimer();
+    });
+  }
+
+  // Detect user activity to reset timer
+  ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
+    document.addEventListener(evt, resetTimer, { passive: true });
+  });
+
+  // Initialize timer on load
+  resetTimer();
+})(); 
