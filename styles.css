@@ -289,11 +289,6 @@ code { background:#010; padding:0 4px; border-radius:3px; }
     margin: 0.75in;
   }
   
-  /* Ensure navigation is hidden only during print */
-  .nav {
-    display: none !important;
-  }
-  
   /* Remove backgrounds for print */
   * {
     background: transparent !important;
