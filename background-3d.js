@@ -30,6 +30,14 @@
   renderer.domElement.id = 'bg3d';
   renderer.domElement.style.pointerEvents = 'none'; // Don't block UI
 
+  // Track mouse movement for parallax effect
+  let mouseX = 0, mouseY = 0;
+  function onMouseMove(event) {
+    mouseX = (event.clientX / window.innerWidth) * 2 - 1;  // -1 to 1
+    mouseY = (event.clientY / window.innerHeight) * 2 - 1; // -1 to 1
+  }
+  window.addEventListener('mousemove', onMouseMove);
+
   // Insert canvas as the first element in <body>
   document.body.prepend(renderer.domElement);
   console.log('Canvas inserted with ID:', renderer.domElement.id);
@@ -68,6 +76,12 @@
     requestAnimationFrame(animate);
     stars.rotation.x += 0.0005;
     stars.rotation.y += 0.0005;
+
+    // Smoothly move camera towards mouse position for subtle parallax
+    camera.position.x += (mouseX * 20 - camera.position.x) * 0.05;
+    camera.position.y += (-mouseY * 20 - camera.position.y) * 0.05;
+    camera.lookAt(scene.position);
+    
     renderer.render(scene, camera);
   }
   animate();
