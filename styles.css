@@ -11,7 +11,7 @@ body.loaded {
 }
 
 /* Fallback: show page after 1 second even if JS doesn't load */
-body {
+body:not(.loaded) {
   animation: showPage 0.1s ease-in-out 1s forwards;
 }
 
@@ -287,11 +287,6 @@ code { background:#010; padding:0 4px; border-radius:3px; }
   @page {
     size: letter;
     margin: 0.75in;
-  }
-  
-  /* Ensure navigation is hidden only during print */
-  .nav {
-    display: none !important;
   }
   
   /* Remove backgrounds for print */

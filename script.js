@@ -311,7 +311,208 @@ document.addEventListener('DOMContentLoaded', function() {
   if (printBtn) {
     printBtn.addEventListener('click', function(e) {
       e.preventDefault();
-      window.print();
+      
+      // Create a new window for printing
+      const printWindow = window.open('', '_blank');
+      if (!printWindow) {
+        alert('Print failed. Please allow popups and try again.');
+        return;
+      }
+      
+      // Build the complete HTML content
+      let printHTML = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <title>Ethan Gordon - Resume</title>
+          <style>
+            @page {
+              size: letter;
+              margin: 0.75in;
+            }
+            
+            @media print {
+              @page {
+                margin: 0.75in;
+                /* Disable headers and footers */
+                @top-left { content: none; }
+                @top-center { content: none; }
+                @top-right { content: none; }
+                @bottom-left { content: none; }
+                @bottom-center { content: none; }
+                @bottom-right { content: none; }
+              }
+            }
+            
+            body {
+              margin: 0;
+              padding: 0;
+              background: #fff;
+              color: #000;
+              font-size: 11pt;
+              font-family: 'Times New Roman', serif;
+              line-height: 1.3;
+            }
+            
+            .print-title {
+              font-size: 16pt;
+              font-weight: bold;
+              margin-bottom: 6pt;
+              text-align: center;
+            }
+            
+            .print-subtitle {
+              font-size: 12pt;
+              margin-bottom: 12pt;
+              text-align: center;
+            }
+            
+            .print-contact {
+              margin-bottom: 4pt;
+              text-align: center;
+            }
+            
+            .print-section-header {
+              font-weight: bold;
+              font-size: 13pt;
+              margin-top: 18pt;
+              margin-bottom: 8pt;
+              text-decoration: underline;
+              text-transform: uppercase;
+              page-break-after: avoid;
+            }
+            
+            .print-section-header:first-of-type {
+              margin-top: 12pt;
+            }
+            
+            .print-content {
+              margin-bottom: 12pt;
+              line-height: 1.4;
+            }
+            
+            .print-skills {
+              margin-bottom: 4pt;
+            }
+            
+            .print-project {
+              margin-bottom: 3pt;
+            }
+            
+            .print-commits {
+              background: #f9f9f9;
+              border: 1pt solid #ccc;
+              padding: 6pt;
+              font-size: 9pt;
+              margin-top: 6pt;
+            }
+            
+            .print-commits ul {
+              margin: 0;
+              padding-left: 12pt;
+              list-style-type: disc;
+            }
+            
+            .print-commits li {
+              margin-bottom: 2pt;
+              font-size: 9pt;
+              line-height: 1.2;
+            }
+          </style>
+        </head>
+        <body>
+      `;
+      
+      // Add header
+      const title = document.querySelector('.title');
+      const subtitle = title ? title.nextElementSibling : null;
+      
+      if (title) {
+        printHTML += `<div class="print-title">${title.textContent}</div>`;
+      }
+      if (subtitle) {
+        printHTML += `<div class="print-subtitle">${subtitle.textContent}</div>`;
+      }
+      
+      // Add contact info - extract location, relocation, and email
+      const resumeContent = document.getElementById('resume-content');
+      const textContent = resumeContent.textContent;
+      
+      // Extract location info
+      const locationMatch = textContent.match(/LOCATION:\s*(.*?)RELOCATION:\s*(.*?)EMAIL:\s*([^\n]+)/s);
+      if (locationMatch) {
+        printHTML += `<div class="print-contact"><strong>LOCATION:</strong> ${locationMatch[1].trim()}</div>`;
+        printHTML += `<div class="print-contact"><strong>RELOCATION:</strong> ${locationMatch[2].trim()}</div>`;
+        printHTML += `<div class="print-contact"><strong>EMAIL:</strong> ${locationMatch[3].trim()}</div>`;
+      } else {
+        // Fallback - find email link
+        const emailLink = document.querySelector('#resume-content a[href^="mailto:"]');
+        if (emailLink) {
+          printHTML += `<div class="print-contact"><strong>EMAIL:</strong> ${emailLink.textContent}</div>`;
+        }
+      }
+      
+      printHTML += '<div style="height: 20pt;"></div>';
+      
+      // Add all sections (excluding GitHub)
+      const sectionsData = [
+        { id: 'cover-letter', title: 'COVER LETTER' },
+        { id: 'summary', title: 'SUMMARY' },
+        { id: 'core-skills', title: 'CORE SKILLS' },
+        { id: 'projects', title: 'SELECTED PROJECTS' },
+        { id: 'experience', title: 'EXPERIENCE' },
+        { id: 'education', title: 'EDUCATION' },
+        { id: 'additional', title: 'ADDITIONAL' }
+      ];
+      
+      sectionsData.forEach(section => {
+        printHTML += `<div class="print-section-header">${section.title}</div>`;
+        
+        const sectionEl = document.getElementById(section.id);
+        if (sectionEl) {
+          let nextElement = sectionEl.nextElementSibling;
+          while (nextElement && !nextElement.classList.contains('section')) {
+            if (nextElement.classList.contains('content-text')) {
+              printHTML += `<div class="print-content">${nextElement.innerHTML}</div>`;
+            } else if (nextElement.classList.contains('skills-grid')) {
+              printHTML += '<div class="print-content">';
+              const skills = nextElement.querySelectorAll('.skill-category');
+              skills.forEach(skill => {
+                printHTML += `<div class="print-skills">${skill.textContent}</div>`;
+              });
+              printHTML += '</div>';
+            } else if (nextElement.classList.contains('projects-list')) {
+              printHTML += '<div class="print-content">';
+              const projects = nextElement.querySelectorAll('.project-item');
+              projects.forEach(project => {
+                printHTML += `<div class="print-project">${project.textContent}</div>`;
+              });
+              printHTML += '</div>';
+            } else if (nextElement.classList.contains('github-box')) {
+              printHTML += '<div class="print-content">';
+              const commitFeed = nextElement.querySelector('#commitFeed');
+              if (commitFeed) {
+                printHTML += `<div class="print-commits">${commitFeed.innerHTML}</div>`;
+              }
+              printHTML += '</div>';
+            }
+            nextElement = nextElement.nextElementSibling;
+          }
+        }
+      });
+      
+      printHTML += '</body></html>';
+      
+      // Write content to new window and print
+      printWindow.document.write(printHTML);
+      printWindow.document.close();
+      
+      // Wait for content to load, then print
+      setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+      }, 500);
     });
   }
 });
