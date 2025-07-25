@@ -128,8 +128,16 @@
   </div>
 
   <script src="script.js"></script>
-  <!-- Cloudflare Web Analytics -->
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "dc48c68cb6914967b46493882d5cba6f"}'></script>
-  <!-- End Cloudflare Web Analytics -->
+  <!-- Cloudflare Web Analytics - Only load on production -->
+  <script>
+    // Only load Cloudflare analytics if not on localhost
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      const script = document.createElement('script');
+      script.defer = true;
+      script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+      script.setAttribute('data-cf-beacon', '{"token": "dc48c68cb6914967b46493882d5cba6f"}');
+      document.head.appendChild(script);
+    }
+  </script>
 </body>
 </html>
