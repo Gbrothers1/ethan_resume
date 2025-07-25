@@ -550,3 +550,55 @@ code { background:#010; padding:0 4px; border-radius:3px; }
 .idle-popup button:hover {
   background: var(--fg-soft);
 }
+
+/* ----------------------------- CRT SCREEN EFFECT ----------------------------- */
+@media screen {
+  /* Subtle scanlines overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    /* 1-px dark line + 1-px transparent → 2-px pattern */
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15) 0px,
+      rgba(0, 0, 0, 0.15) 1px,
+      rgba(0, 0, 0, 0) 2px
+    );
+    mix-blend-mode: multiply;
+    opacity: 0.4;
+    z-index: 9998;
+    animation: crt-flicker 0.18s infinite;
+  }
+
+  /* Curved-glass vignette */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center,
+      rgba(0, 0, 0, 0) 60%,
+      rgba(0, 0, 0, 0.55) 100%);
+    mix-blend-mode: multiply;
+    opacity: 0.35;
+    z-index: 9999;
+  }
+
+  /* Slight glow & colour pop for on-screen content */
+  .container {
+    filter: contrast(1.15) saturate(1.2) brightness(0.9);
+  }
+
+  @keyframes crt-flicker {
+    0%, 100% { opacity: 0.37; }
+    50% { opacity: 0.43; }
+  }
+}
