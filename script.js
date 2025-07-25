@@ -278,9 +278,139 @@ function showSectionWithoutAnimation(sectionId) {
   }
 }
 
+// === Dynamic Resume Content Loader ===
+async function fetchResumeData() {
+  try {
+    const res = await fetch('resume.json');
+    if (!res.ok) {
+      throw new Error(`Failed to fetch resume.json: ${res.status}`);
+    }
+    const data = await res.json();
+    buildResumeHTML(data);
+  } catch (err) {
+    console.error('Error loading resume data:', err);
+  }
+}
+
+function buildResumeHTML(data) {
+  // Target containers already present in index.html
+  const resumeContainer = document.getElementById('resume-content');
+  const contentArea = document.getElementById('content-area');
+  if (!resumeContainer || !contentArea) {
+    console.error('Required containers not found in DOM');
+    return;
+  }
+
+  // Clear any existing markup (in case of static fallback)
+  resumeContainer.innerHTML = '';
+  contentArea.innerHTML = '';
+
+  /* ---------- Header / Contact ---------- */
+  const titleEl = document.createElement('span');
+  titleEl.className = 'title';
+  titleEl.textContent = data.title || '';
+  resumeContainer.appendChild(titleEl);
+
+  if (data.subtitle) {
+    const subtitleEl = document.createElement('span');
+    subtitleEl.textContent = data.subtitle;
+    resumeContainer.appendChild(subtitleEl);
+  }
+
+  const divider = document.createElement('span');
+  divider.className = 'divider';
+  divider.textContent = '======================================================================================';
+  resumeContainer.appendChild(divider);
+
+  const contactHTML = `<strong>LOCATION:</strong> ${data.location || ''} <strong>RELOCATION:</strong> ${data.relocation || ''} <strong>EMAIL:</strong> <a href="mailto:${data.email}">${data.email}</a>`;
+  const contactWrap = document.createElement('span');
+  contactWrap.innerHTML = contactHTML;
+  resumeContainer.appendChild(contactWrap);
+
+  const divider2 = divider.cloneNode(true);
+  resumeContainer.appendChild(divider2);
+
+  /* ---------- Navigation ---------- */
+  const navDiv = document.createElement('div');
+  navDiv.className = 'nav';
+  if (Array.isArray(data.sections)) {
+    data.sections.forEach(sec => {
+      const link = document.createElement('a');
+      link.href = `#${sec.id}`;
+      link.textContent = sec.navLabel || sec.title || sec.id.toUpperCase();
+      navDiv.appendChild(link);
+    });
+  }
+  // Print link
+  const printLink = document.createElement('a');
+  printLink.href = '#';
+  printLink.id = 'printBtn';
+  printLink.textContent = 'PRINT';
+  navDiv.appendChild(printLink);
+
+  resumeContainer.appendChild(navDiv);
+
+  const dividerNav = document.createElement('span');
+  dividerNav.className = 'divider-nav';
+  dividerNav.textContent = '======================================================================================';
+  resumeContainer.appendChild(dividerNav);
+
+  /* ---------- Sections ---------- */
+  if (Array.isArray(data.sections)) {
+    data.sections.forEach(sec => {
+      // Section header
+      const sectionHeader = document.createElement('span');
+      sectionHeader.className = 'section';
+      sectionHeader.id = sec.id;
+      sectionHeader.textContent = sec.title;
+      contentArea.appendChild(sectionHeader);
+
+      // Section body
+      if (sec.type === 'skills' && Array.isArray(sec.skills)) {
+        const grid = document.createElement('div');
+        grid.className = 'skills-grid';
+        sec.skills.forEach(s => {
+          const item = document.createElement('div');
+          item.className = 'skill-category';
+          item.textContent = s;
+          grid.appendChild(item);
+        });
+        contentArea.appendChild(grid);
+      } else if (sec.type === 'projects' && Array.isArray(sec.projects)) {
+        const list = document.createElement('div');
+        list.className = 'projects-list';
+        sec.projects.forEach(p => {
+          const item = document.createElement('div');
+          item.className = 'project-item';
+          item.textContent = p;
+          list.appendChild(item);
+        });
+        contentArea.appendChild(list);
+      } else if (sec.type === 'github' && sec.githubBoxHTML) {
+        // For GitHub integration we allow raw HTML since it contains img tags etc.
+        const githubBox = document.createElement('div');
+        githubBox.className = 'github-box';
+        githubBox.innerHTML = sec.githubBoxHTML;
+        contentArea.appendChild(githubBox);
+      } else {
+        // Default to simple text content
+        const contentText = document.createElement('div');
+        contentText.className = 'content-text';
+        // Preserve line breaks
+        contentText.innerHTML = (sec.content || '').replace(/\n/g, '<br>');
+        contentArea.appendChild(contentText);
+      }
+    });
+  }
+}
+// === End Dynamic Resume Content Loader ===
+
 // Initialize everything when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
   console.log('DOM loaded, initializing...');
+  
+  // Wait for resume data to load and DOM to be populated
+  await fetchResumeData();
   
   // Set up navigation
   const navButtons = document.querySelectorAll('.nav a');
