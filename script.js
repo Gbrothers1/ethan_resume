@@ -364,4 +364,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initialize timer on load
   resetTimer();
+
+  // Testing shortcut: Ctrl+Shift+P triggers popup immediately
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && (e.key === 'P' || e.key === 'p')) {
+      showPopup();
+      // Prevent default browser print shortcut when popup is triggered intentionally
+      e.preventDefault();
+    }
+  });
 })(); 
