@@ -21,6 +21,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved page loading experience with fade-in transition
 - Enhanced visual feedback during typing with animated cursor
 
+## [1.3.2] - 2025-07-24
+
+### Changed
+- Moved chat exporter tools to experimental branch for better project organization
+- Cleaned up main branch to focus solely on resume functionality
+- Updated .gitignore to remove exporter-specific entries
+
 ## [1.3.1] - 2025-07-24
 
 ### Added
