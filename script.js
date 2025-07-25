@@ -54,6 +54,41 @@ function showAllSections() {
   });
 }
 
+/* ---------- Typing effect with auto-scroll ---------- */
+let typingStarted = false;
+
+function typeText(element, text, speed = 15) {
+  let idx = 0;
+  function type() {
+    if (idx < text.length) {
+      element.textContent += text.charAt(idx);
+      idx++;
+      // Auto scroll the surrounding content area so the newest text is always visible
+      const contentArea = document.getElementById('content-area');
+      if (contentArea) {
+        contentArea.scrollTop = contentArea.scrollHeight;
+      }
+      setTimeout(type, speed);
+    }
+  }
+  type();
+}
+
+function startTypingEffect() {
+  if (typingStarted) return; // Only run once per page load
+  typingStarted = true;
+
+  // Locate the cover-letter content block (first .content-text after #cover-letter header)
+  const coverHeader = document.getElementById('cover-letter');
+  if (!coverHeader) return;
+  const coverTextEl = coverHeader.nextElementSibling;
+  if (!coverTextEl || !coverTextEl.classList.contains('content-text')) return;
+
+  const originalText = coverTextEl.textContent.trim();
+  coverTextEl.textContent = ""; // Clear existing text before typing
+  typeText(coverTextEl, originalText, 15);
+}
+
 // Initialize navigation
 document.addEventListener('DOMContentLoaded', function() {
   // Add click and touch handlers to navigation buttons for mobile support
@@ -77,6 +112,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Show only cover letter on first load
   showSection('cover-letter');
+  // Start typing effect with auto-scroll once the cover letter is visible
+  startTypingEffect();
 
     // Print button – generate printout without changing page
   const printBtn = document.getElementById('printBtn');
