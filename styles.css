@@ -6,6 +6,8 @@ html,body { margin:0; height:100%; font-family:'Fira Mono',monospace; color:var(
   padding:clamp(8px, 2vw, 16px); 
   white-space:pre-line; 
   line-height:1.2; 
+  position: relative;
+  z-index: 1;
 }
 #resume-content {
   min-height: 60vh;
@@ -479,4 +481,15 @@ code { background:#010; padding:0 4px; border-radius:3px; }
 
 .idle-popup button:hover {
   background: var(--fg-soft);
+} 
+
+/* 3D background canvas */
+#bg3d {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
 } 
