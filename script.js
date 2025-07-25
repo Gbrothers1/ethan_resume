@@ -335,7 +335,14 @@ document.addEventListener('DOMContentLoaded', function() {
   let idleTimer;
 
   // Build and append popup markup
-  const popupHTML = `\n    <div class="idle-popup-overlay" id="idlePopup">\n      <div class="idle-popup">\n        <h2>🕹️ AFK DETECTED!</h2>\n        <p>You have been inactive for 60 seconds.<br>Click <strong>CONTINUE</strong> to resume your quest.</p>\n        <button id="idleContinueBtn">CONTINUE ▶</button>\n      </div>\n    </div>`;
+  const popupHTML = `
+    <div class="idle-popup-overlay" id="idlePopup">
+      <div class="idle-popup">
+        <h2>🕹️ AFK DETECTED!</h2>
+        <p>You have been inactive for 60 seconds.<br>Click <strong>CONTINUE</strong> to resume your quest.</p>
+        <button id="idleContinueBtn">CONTINUE ▶</button>
+      </div>
+    </div>`;
   document.body.insertAdjacentHTML('beforeend', popupHTML);
 
   const overlay = document.getElementById('idlePopup');
