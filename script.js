@@ -314,6 +314,10 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Create a new window for printing
       const printWindow = window.open('', '_blank');
+      if (!printWindow) {
+        alert('Print failed. Please allow popups and try again.');
+        return;
+      }
       
       // Build the complete HTML content
       let printHTML = `
@@ -436,7 +440,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const textContent = resumeContent.textContent;
       
       // Extract location info
-      const locationMatch = textContent.match(/LOCATION:\s*([^R]+)RELOCATION:\s*([^E]+)EMAIL:\s*([^\n]+)/);
+      const locationMatch = textContent.match(/LOCATION:\s*(.*?)RELOCATION:\s*(.*?)EMAIL:\s*([^\n]+)/);
       if (locationMatch) {
         printHTML += `<div class="print-contact"><strong>LOCATION:</strong> ${locationMatch[1].trim()}</div>`;
         printHTML += `<div class="print-contact"><strong>RELOCATION:</strong> ${locationMatch[2].trim()}</div>`;
