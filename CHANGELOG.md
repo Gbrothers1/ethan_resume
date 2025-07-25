@@ -7,18 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.3.0] - 2025-07-24
+### Added
+- GitHub Actions workflow for automated releases
+- Release management script for easy versioning
+- Comprehensive release documentation and guides
+- GPG key integration for secure commits
+
+### Changed
+- Updated release script to handle GPG signing issues
+- Improved changelog format and structure
+- Enhanced release automation workflow
+
+## [1.3.0] - 2024-07-24
 
 ### Added
 - Enhanced README with comprehensive feature documentation
 - Green accent bars for content sections
 - Hidden scrollbars for cleaner appearance
+- Complete release management system
 
 ### Changed
 - Improved content area styling and layout
 - Adjusted padding and margins for consistent design
-
-## [1.3.0] - 2025-07-24
+- Updated release process with automation
 
 ## [1.2.0] - 2024-07-24
 
