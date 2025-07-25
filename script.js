@@ -4,7 +4,7 @@ function showSection(sectionId) {
   const contentArea = document.getElementById('content-area');
   
   // Hide all sections
-  const allSections = document.querySelectorAll('.section, .content-text, .skills-grid, .projects-list, .github-box');
+  const allSections = document.querySelectorAll('.section, .content-text, .skills-grid, .projects-list, .github-box, .gallery-grid');
   allSections.forEach(section => {
     section.style.display = 'none';
   });
@@ -42,7 +42,7 @@ function updateActiveNav(activeId) {
 
 function showAllSections() {
   // Show all sections
-  const allSections = document.querySelectorAll('.section, .content-text, .skills-grid, .projects-list, .github-box');
+  const allSections = document.querySelectorAll('.section, .content-text, .skills-grid, .projects-list, .github-box, .gallery-grid');
   allSections.forEach(section => {
     section.style.display = 'block';
   });
@@ -229,6 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { id: 'summary', title: 'SUMMARY' },
         { id: 'core-skills', title: 'CORE SKILLS' },
         { id: 'projects', title: 'SELECTED PROJECTS' },
+        { id: 'portfolio', title: 'PORTFOLIO' },
         { id: 'experience', title: 'EXPERIENCE' },
         { id: 'education', title: 'EDUCATION' },
         { id: 'additional', title: 'ADDITIONAL' }

@@ -55,6 +55,23 @@ a:hover { background:var(--fg); color:var(--bg); }
 .skill-category { margin:2px 0; }
 .projects-list { margin:4px 0; }
 .project-item { margin:2px 0; padding-left:4px; }
+
+/* Portfolio gallery grid */
+.gallery-grid {
+  position: relative;
+  margin:4px 0;
+  padding-left: 12px; /* align with other content */
+  border-left: 2px solid var(--accent);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--accent);
+}
 code { background:#010; padding:0 4px; border-radius:3px; }
 /* Navigation */
 .nav {
