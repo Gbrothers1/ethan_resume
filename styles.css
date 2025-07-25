@@ -1,3 +1,28 @@
+/* Prevent Flash of Unstyled Content (FOUC) */
+body {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+body.loaded {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Fallback: show page after 1 second even if JS doesn't load */
+body {
+  animation: showPage 0.1s ease-in-out 1s forwards;
+}
+
+@keyframes showPage {
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+/* Terminal-style color scheme */
 :root { --bg:#000; --fg:#0f0; --fg-soft:#6f6; --accent:#060; }
 html,body { margin:0; height:100%; font-family:'Fira Mono',monospace; color:var(--fg); background:var(--bg); overflow-x:hidden; }
 .container { 
@@ -93,6 +118,23 @@ code { background:#010; padding:0 4px; border-radius:3px; }
   position: relative;
   padding-left: 12px;
   border-left: 2px solid var(--accent);
+}
+
+/* Typing animation cursor effect */
+.typing-active::after {
+  content: '|';
+  animation: blink 1s infinite;
+  color: var(--accent);
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Smooth transition for typing animation */
+.content-text {
+  transition: opacity 0.2s ease-in-out;
 }
 
 /* Hide scrollbars */

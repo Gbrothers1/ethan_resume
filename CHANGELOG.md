@@ -5,14 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- Auto-typing animation for cover letter section
+- Smooth typing effect with blinking cursor on first page load
+- Auto-scroll functionality synchronized with typing animation
+- Intelligent navigation behavior (animation on first load, full text on subsequent visits)
+- FOUC (Flash of Unstyled Content) prevention with smooth page fade-in
+- Enhanced user experience with professional loading transitions
+
+### Changed
+- Cover letter now displays with typing animation on initial page load
+- Navigation to cover letter after visiting other sections shows full text immediately
+- Improved page loading experience with fade-in transition
+- Enhanced visual feedback during typing with animated cursor
+
 ## [1.3.2] - 2025-07-24
 
 ### Changed
 - Moved chat exporter tools to experimental branch for better project organization
 - Cleaned up main branch to focus solely on resume functionality
 - Updated .gitignore to remove exporter-specific entries
-
-## [Unreleased]
 
 ## [1.3.1] - 2025-07-24
 
