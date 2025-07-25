@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.3.1] - 2025-07-24
 
 ### Added
 - GitHub Actions workflow for automated releases
@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated release script to handle GPG signing issues
 - Improved changelog format and structure
 - Enhanced release automation workflow
+
+## [Unreleased]
 
 ## [1.3.0] - 2024-07-24
 
@@ -141,3 +143,65 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `refactor: restructure code`
   - `test: add tests`
   - `chore: maintenance tasks` 
+
+---
+
+## 1. **Check Pinentry Installation**
+
+GPG uses a helper called `pinentry` to prompt for your passphrase. On macOS, you should have `pinentry-mac` installed.
+
+**Install (or reinstall) pinentry-mac:**
+```sh
+brew install pinentry-mac
+```
+
+---
+
+## 2. **Configure GPG to Use pinentry-mac**
+
+Edit (or create) your GPG agent config file:
+```sh
+echo "pinentry-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
+```
+Or, if you’re on Apple Silicon (M1/M2), the path might be:
+```sh
+echo "pinentry-program /opt/homebrew/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
+```
+
+---
+
+## 3. **Restart the GPG Agent**
+
+```sh
+gpgconf --kill gpg-agent
+gpgconf --launch gpg-agent
+```
+
+---
+
+## 4. **Test GPG Signing in a Real Terminal**
+
+Now, in your terminal (not through an automated script), run:
+```sh
+echo "test" | gpg --clearsign
+```
+You should get a GUI prompt for your passphrase. Enter it, and GPG will cache it for a while.
+
+---
+
+## 5. **Try Your Git Commit Again**
+
+After successfully signing once, try:
+```sh
+git commit -m "chore: test GPG signing with patch release"
+```
+
+---
+
+### If you still don’t get a prompt:
+- Make sure you’re not running in a VSCode/remote/automated shell that doesn’t support GUI prompts.
+- Try running the above commands in the standard Terminal app.
+
+---
+
+Would you like me to run the Homebrew install and config steps for you, or would you like to try them yourself? If you want me to proceed, let me know if you’re on Intel or Apple Silicon (M1/M2) so I use the correct path! 
