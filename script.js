@@ -440,7 +440,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const textContent = resumeContent.textContent;
       
       // Extract location info
-      const locationMatch = textContent.match(/LOCATION:\s*(.*?)RELOCATION:\s*(.*?)EMAIL:\s*([^\n]+)/);
+      const locationMatch = textContent.match(/LOCATION:\s*(.*?)RELOCATION:\s*(.*?)EMAIL:\s*([^\n]+)/s);
       if (locationMatch) {
         printHTML += `<div class="print-contact"><strong>LOCATION:</strong> ${locationMatch[1].trim()}</div>`;
         printHTML += `<div class="print-contact"><strong>RELOCATION:</strong> ${locationMatch[2].trim()}</div>`;
