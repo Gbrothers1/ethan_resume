@@ -1,11 +1,18 @@
 /* Live 3D Background powered by Three.js
    This script creates a subtle rotating starfield that sits behind
    the main résumé content.  The canvas is transparent and non-interactive
-   so it won’t interfere with page clicks or touch events. */
+   so it won't interfere with page clicks or touch events. */
 
 (function () {
+  console.log('Background 3D script starting...');
+  
   // Bail out if THREE is unavailable (e.g., script failed to load)
-  if (typeof THREE === 'undefined') return;
+  if (typeof THREE === 'undefined') {
+    console.error('THREE is undefined - Three.js failed to load');
+    return;
+  }
+  
+  console.log('THREE is available, creating scene...');
 
   // Create scene, camera, renderer
   const scene = new THREE.Scene();
@@ -21,10 +28,11 @@
   renderer.setPixelRatio(window.devicePixelRatio || 1);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.domElement.id = 'bg3d';
-  renderer.domElement.style.pointerEvents = 'none'; // Don’t block UI
+  renderer.domElement.style.pointerEvents = 'none'; // Don't block UI
 
   // Insert canvas as the first element in <body>
   document.body.prepend(renderer.domElement);
+  console.log('Canvas inserted with ID:', renderer.domElement.id);
 
   // Generate starfield
   const STAR_COUNT = 5000;
@@ -45,6 +53,7 @@
     depthWrite: false });
   const stars = new THREE.Points(starGeometry, starMaterial);
   scene.add(stars);
+  console.log('Starfield created with', STAR_COUNT, 'stars');
 
   // Handle window resize
   function onResize() {
@@ -62,4 +71,5 @@
     renderer.render(scene, camera);
   }
   animate();
+  console.log('Animation loop started');
 })();
