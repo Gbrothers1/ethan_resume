@@ -576,6 +576,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const overlay = document.getElementById('idlePopup');
   const continueBtn = document.getElementById('idleContinueBtn');
+  
+  // Windows OS crash sound effect (plays when popup appears)
+  const crashSound = new Audio('https://www.myinstants.com/media/sounds/windows-xp-error.mp3');
+  crashSound.preload = 'auto';
 
   function resetTimer() {
     clearTimeout(idleTimer);
@@ -584,6 +588,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function showPopup() {
     overlay.classList.add('active');
+
+    // Play crash sound when the popup appears
+    try {
+      crashSound.currentTime = 0; // rewind to start in case previously played
+      crashSound.play().catch(err => {
+        console.warn('⚠️ Autoplay prevented or failed:', err);
+      });
+    } catch (err) {
+      console.error('Failed to play crash sound:', err);
+    }
   }
 
   if (continueBtn) {
