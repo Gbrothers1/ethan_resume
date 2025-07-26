@@ -188,7 +188,7 @@ code { background:#010; padding:0 4px; border-radius:3px; }
   .skills-grid { grid-template-columns:1fr; gap:2px; }
   .content-text { max-width:100%; font-size:0.9rem; }
   .content-area {
-    top: 280px;
+    top: 260px;
     max-height: 65vh;
     width: 98vw;
   }
@@ -250,10 +250,15 @@ code { background:#010; padding:0 4px; border-radius:3px; }
     box-shadow: 0 2px 4px rgba(0, 255, 0, 0.2);
   }
   .content-area {
-    top: 400px;
-    max-height: 55vh;
+    top: 300px;
+    max-height: 60vh;
     width: 100vw;
     padding: 0 4px;
+  }
+
+  /* Reduce header block height to minimize blank space above navigation */
+  #resume-content {
+    min-height: 40vh;
   }
   .content-text { font-size:0.85rem; line-height:1.4; }
   .skills-grid { margin:2px 0; }
